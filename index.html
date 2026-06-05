@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Space Scene</title>
+<link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -315,22 +316,24 @@
   }
 
   .coming-soon {
-    font-size: 3.5vw;
-    font-weight: 700;
-    color: rgba(200, 230, 255, 0.85);
+    font-family: 'Audiowide', sans-serif;
+    font-size: 3.2vw;
+    font-weight: 400;
+    color: rgba(200, 230, 255, 0.95);
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 4px;
     margin-top: 20px;
     margin-bottom: 50px;
     text-shadow:
       0 0 10px rgba(100, 180, 255, 0.5),
       0 0 20px rgba(100, 180, 255, 0.3);
+    font-stretch: condensed;
   }
 
   @media (max-width: 640px) {
     .coming-soon {
-      font-size: 6vw;
-      letter-spacing: 1px;
+      font-size: 5.5vw;
+      letter-spacing: 2px;
       margin-bottom: 30px;
     }
 
