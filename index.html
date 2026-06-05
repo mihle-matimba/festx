@@ -445,10 +445,48 @@
     line-height: 1.5;
   }
 
+  .progress-bar {
+    width: 100%;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    margin-bottom: 30px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, rgba(220, 100, 100, 0.8), rgba(200, 80, 80, 0.6));
+    width: 33.33%;
+    transition: width 0.3s ease;
+    border-radius: 2px;
+  }
+
   .card-form {
     display: flex;
     flex-direction: column;
     gap: 18px;
+    position: relative;
+  }
+
+  .form-step {
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .form-step.active {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   .form-group {
@@ -516,6 +554,39 @@
   .form-button:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+  }
+
+  .button-group {
+    display: flex;
+    gap: 12px;
+  }
+
+  .button-group .form-button {
+    flex: 1;
+  }
+
+  .form-button-back {
+    flex: 1;
+    padding: 14px 24px;
+    background: rgba(100, 100, 100, 0.15);
+    color: rgba(200, 200, 200, 0.95);
+    border: 1.5px solid rgba(100, 100, 100, 0.3);
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: 'Space Mono', monospace;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 15px rgba(100, 100, 100, 0.15);
+  }
+
+  .form-button-back:hover {
+    background: rgba(100, 100, 100, 0.25);
+    border-color: rgba(120, 120, 120, 0.5);
+    box-shadow: 0 0 20px rgba(100, 100, 100, 0.25);
+    transform: translateY(-2px);
   }
 
   .success-content {
@@ -596,12 +667,43 @@
           <h2 class="content-label">Limited Early Access. Unlimited Opportunity.</h2>
         </div>
 
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+
         <form id="waitlistForm" class="card-form">
-          <div class="form-group">
-            <label class="form-label">Email Address</label>
-            <input type="email" id="cardEmail" name="email" placeholder="your@email.com" required class="form-input">
+          <!-- Step 1: Email -->
+          <div class="form-step active" id="step1">
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" id="cardEmail" name="email" placeholder="your@email.com" required class="form-input">
+            </div>
+            <button type="button" class="form-button" onclick="nextStep(1)">Next</button>
           </div>
-          <button type="submit" class="form-button">Join Waitlist</button>
+
+          <!-- Step 2: First Name -->
+          <div class="form-step" id="step2">
+            <div class="form-group">
+              <label class="form-label">First Name</label>
+              <input type="text" id="cardFirstName" name="firstName" placeholder="John" required class="form-input">
+            </div>
+            <div class="button-group">
+              <button type="button" class="form-button-back" onclick="prevStep(2)">Back</button>
+              <button type="button" class="form-button" onclick="nextStep(2)">Next</button>
+            </div>
+          </div>
+
+          <!-- Step 3: Phone Number -->
+          <div class="form-step" id="step3">
+            <div class="form-group">
+              <label class="form-label">Phone Number</label>
+              <input type="tel" id="cardPhone" name="phone" placeholder="+1 (555) 000-0000" required class="form-input">
+            </div>
+            <div class="button-group">
+              <button type="button" class="form-button-back" onclick="prevStep(3)">Back</button>
+              <button type="submit" class="form-button">Join Waitlist</button>
+            </div>
+          </div>
         </form>
       </div>
 
@@ -683,22 +785,75 @@ resize();
 window.addEventListener('resize', () => { resize(); });
 requestAnimationFrame(tick);
 
-// Form Handling
+// Multi-step Form Handling
+let currentStep = 1;
 const waitlistForm = document.getElementById('waitlistForm');
 const formContent = document.getElementById('formContent');
 const successContent = document.getElementById('successContent');
+
+function updateProgressBar() {
+  const progressFill = document.getElementById('progressFill');
+  progressFill.style.width = (currentStep * 33.33) + '%';
+}
+
+function showStep(step) {
+  // Hide all steps
+  document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+
+  // Show current step
+  document.getElementById(`step${step}`).classList.add('active');
+  updateProgressBar();
+}
+
+function nextStep(step) {
+  const email = document.getElementById('cardEmail').value.trim();
+  const firstName = document.getElementById('cardFirstName').value.trim();
+
+  if (step === 1) {
+    if (!email || !email.includes('@')) {
+      alert('Please enter a valid email');
+      return;
+    }
+    currentStep = 2;
+  } else if (step === 2) {
+    if (!firstName) {
+      alert('Please enter your first name');
+      return;
+    }
+    currentStep = 3;
+  }
+
+  showStep(currentStep);
+}
+
+function prevStep(step) {
+  currentStep = step - 1;
+  showStep(currentStep);
+}
 
 waitlistForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const email = document.getElementById('cardEmail').value.trim();
+  const firstName = document.getElementById('cardFirstName').value.trim();
+  const phone = document.getElementById('cardPhone').value.trim();
 
   if (!email || !email.includes('@')) {
     alert('Please enter a valid email');
     return;
   }
 
-  const button = waitlistForm.querySelector('.form-button');
+  if (!firstName) {
+    alert('Please enter your first name');
+    return;
+  }
+
+  if (!phone || phone.length < 10) {
+    alert('Please enter a valid phone number');
+    return;
+  }
+
+  const button = waitlistForm.querySelector('[type="submit"]');
   const originalText = button.textContent;
   button.disabled = true;
   button.textContent = 'JOINING...';
@@ -710,9 +865,9 @@ waitlistForm.addEventListener('submit', async (e) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        first_name: 'FestX',
+        first_name: firstName,
         email: email,
-        phone_number: ''
+        phone_number: phone
       })
     });
 
@@ -731,6 +886,9 @@ waitlistForm.addEventListener('submit', async (e) => {
     button.textContent = originalText;
   }
 });
+
+// Initialize first step
+showStep(1);
 </script>
 </body>
 </html>

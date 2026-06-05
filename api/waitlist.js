@@ -34,6 +34,10 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Valid email is required' });
     }
 
+    if (!phone_number || typeof phone_number !== 'string' || phone_number.trim().length < 10) {
+      return res.status(400).json({ error: 'Valid phone number is required' });
+    }
+
 
     // Insert into Supabase
     const { data, error } = await supabase
