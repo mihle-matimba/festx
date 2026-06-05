@@ -16,6 +16,13 @@ export default async function handler(req, res) {
   }
 
   try {
+    if (!supabaseUrl || !supabaseKey) {
+      console.error('Missing Supabase credentials');
+      return res.status(500).json({
+        error: 'Server configuration error: Missing Supabase credentials. Add SUPABASE_URL and SUPABASE_ANON_KEY to Vercel environment variables.'
+      });
+    }
+
     const { first_name, email, phone_number } = req.body;
 
     // Validate input
@@ -42,12 +49,12 @@ export default async function handler(req, res) {
       .select();
 
     if (error) {
+      console.error('Supabase error:', error);
       // Handle duplicate email error
-      if (error.code === '23505') {
+      if (error.code === '23505' || error.message.includes('duplicate')) {
         return res.status(409).json({ error: 'This email is already registered' });
       }
-      console.error('Supabase error:', error);
-      return res.status(500).json({ error: 'Failed to join waitlist' });
+      return res.status(500).json({ error: `Failed to join waitlist: ${error.message}` });
     }
 
     return res.status(201).json({
@@ -58,6 +65,6 @@ export default async function handler(req, res) {
 
   } catch (error) {
     console.error('API error:', error);
-    return res.status(500).json({ error: 'Internal server error' });
+    return res.status(500).json({ error: `Server error: ${error.message}` });
   }
 }
