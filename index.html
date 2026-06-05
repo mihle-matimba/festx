@@ -314,54 +314,6 @@
     }
   }
 
-  .logo-container {
-    position: relative;
-    margin-bottom: 20px;
-  }
-
-  .logo-glow {
-    position: absolute;
-    inset: -30px;
-    background: radial-gradient(circle, rgba(100, 180, 255, 0.3) 0%, transparent 70%);
-    border-radius: 50%;
-    animation: neon-pulse 1.5s ease-in-out infinite;
-    z-index: -1;
-  }
-
-  @keyframes neon-pulse {
-    0%, 100% {
-      box-shadow: 0 0 20px rgba(100, 180, 255, 0.4), 0 0 40px rgba(100, 180, 255, 0.2);
-      opacity: 0.6;
-    }
-    50% {
-      box-shadow: 0 0 40px rgba(100, 180, 255, 0.6), 0 0 60px rgba(100, 180, 255, 0.3);
-      opacity: 1;
-    }
-  }
-
-  @keyframes heartbeat {
-    0%, 100% {
-      transform: scale(1);
-    }
-    14% {
-      transform: scale(1.05);
-    }
-    28% {
-      transform: scale(1);
-    }
-    42% {
-      transform: scale(1.05);
-    }
-    56% {
-      transform: scale(1);
-    }
-  }
-
-  .logo {
-    animation: fadeIn 0.8s ease-in-out, heartbeat 1.2s ease-in-out infinite 0.5s;
-    transform-origin: center;
-  }
-
   .coming-soon {
     font-size: 3.5vw;
     font-weight: 700;
@@ -592,10 +544,7 @@
 <canvas id="stars"></canvas>
 
 <div class="content">
-  <div class="logo-container">
-    <div class="logo-glow"></div>
-    <img src="https://ffxlryusmstnfjedleds.supabase.co/storage/v1/object/public/Assets/festxlogocolour.png" alt="FestX Logo" class="logo">
-  </div>
+  <img src="https://ffxlryusmstnfjedleds.supabase.co/storage/v1/object/public/Assets/festxlogocolour.png" alt="FestX Logo" class="logo">
   <div class="coming-soon">Coming Soon</div>
   <button class="join-btn" id="joinBtn">Join Waitlist</button>
 </div>
