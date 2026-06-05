@@ -878,6 +878,10 @@ waitlistForm.addEventListener('submit', async (e) => {
     if (response.ok) {
       formContent.style.display = 'none';
       successContent.style.display = 'block';
+    } else if (response.status === 409) {
+      alert("You're already on the list!");
+      button.disabled = false;
+      button.textContent = originalText;
     } else {
       alert('Error joining. Try again.');
       button.disabled = false;
