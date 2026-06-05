@@ -408,160 +408,102 @@
     margin: 0 auto;
   }
 
-  .card-title {
-    font-size: 32px;
-    font-weight: 300;
-    color: #fff;
-    margin: 25px 0 15px 0;
-    letter-spacing: 0.5px;
+  .card-content-header {
+    margin-bottom: 35px;
     text-align: center;
   }
 
-  .card-subtitle {
-    font-size: 15px;
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.6;
-    text-align: center;
-    margin-bottom: 30px;
+  .content-label {
+    font-size: 13px;
+    color: rgba(200, 100, 100, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 400;
+    font-family: 'Space Mono', monospace;
+    margin: 0 0 12px 0;
+  }
+
+  .content-value {
+    font-size: 42px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+    font-family: 'Space Mono', monospace;
+    margin: 0;
+    line-height: 1.2;
   }
 
   .card-form {
-    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
   }
 
-  .form-row {
+  .form-group {
     display: flex;
-    gap: 12px;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .form-label {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Space Mono', monospace;
+    font-weight: 600;
   }
 
   .form-input {
-    flex: 1;
-    padding: 12px 16px;
-    background: rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 12px;
+    padding: 14px 16px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(200, 80, 80, 0.3);
+    border-radius: 8px;
     color: #fff;
-    font-size: 14px;
+    font-size: 15px;
     font-family: 'Space Mono', monospace;
+    letter-spacing: 0.5px;
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
   }
 
   .form-input::placeholder {
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.3);
   }
 
   .form-input:focus {
     outline: none;
-    border-color: rgba(255, 255, 255, 0.25);
-    background: rgba(0, 0, 0, 0.5);
-    box-shadow: 0 0 15px rgba(220, 100, 100, 0.2);
+    border-color: rgba(200, 100, 100, 0.6);
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 20px rgba(200, 80, 80, 0.25);
   }
 
   .form-button {
-    padding: 12px 24px;
-    background: #c85050;
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 600;
+    padding: 14px 24px;
+    background: rgba(200, 80, 80, 0.15);
+    color: rgba(255, 200, 200, 0.95);
+    border: 1.5px solid rgba(200, 80, 80, 0.4);
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
     font-family: 'Space Mono', monospace;
     cursor: pointer;
     transition: all 0.3s ease;
-    white-space: nowrap;
-    letter-spacing: 0.5px;
-    box-shadow: 0 0 20px rgba(200, 80, 80, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 20px rgba(200, 80, 80, 0.2);
   }
 
   .form-button:hover {
-    background: #d96060;
-    box-shadow: 0 0 30px rgba(220, 100, 100, 0.5);
+    background: rgba(200, 80, 80, 0.25);
+    border-color: rgba(200, 100, 100, 0.6);
+    box-shadow: 0 0 30px rgba(220, 100, 100, 0.4);
     transform: translateY(-2px);
   }
 
-  .joined-section {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 30px;
-  }
-
-  .avatars {
-    display: flex;
-    gap: -8px;
-    margin-left: -8px;
-  }
-
-  .avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 12px;
-    font-weight: 600;
-    z-index: 1;
-    margin-left: -8px;
-  }
-
-  .avatar:first-child {
-    margin-left: 0;
-  }
-
-  .av1 {
-    background: linear-gradient(135deg, rgba(96, 165, 250, 0.8), rgba(37, 99, 235, 0.8));
-  }
-
-  .av2 {
-    background: linear-gradient(135deg, rgba(74, 222, 128, 0.8), rgba(34, 197, 94, 0.8));
-  }
-
-  .av3 {
-    background: linear-gradient(135deg, rgba(168, 85, 247, 0.8), rgba(126, 34, 206, 0.8));
-  }
-
-  .joined-text {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.6);
-  }
-
-  .countdown {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    text-align: center;
-  }
-
-  .countdown-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .countdown-number {
-    font-size: 28px;
-    font-weight: 300;
-    color: #fff;
-    line-height: 1;
-  }
-
-  .countdown-label {
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.5);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 6px;
-  }
-
-  .countdown-sep {
-    color: rgba(255, 255, 255, 0.25);
-    font-size: 18px;
+  .form-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
   }
 
   .success-content {
@@ -570,30 +512,34 @@
   }
 
   .success-icon {
-    width: 64px;
-    height: 64px;
+    width: 60px;
+    height: 60px;
     margin: 0 auto 20px;
     border-radius: 50%;
-    background: rgba(34, 197, 94, 0.2);
-    border: 2px solid rgba(34, 197, 94, 0.4);
+    background: rgba(76, 175, 80, 0.15);
+    border: 1.5px solid rgba(76, 175, 80, 0.4);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 32px;
-    color: #22c55e;
+    font-size: 28px;
+    color: #4caf50;
+    font-family: 'Space Mono', monospace;
   }
 
   .success-title {
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 24px;
+    font-weight: 700;
     color: #fff;
     margin-bottom: 12px;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.5px;
   }
 
   .success-message {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.8);
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
     line-height: 1.6;
+    font-family: 'Space Mono', monospace;
   }
 
   @media (max-width: 640px) {
@@ -633,46 +579,18 @@
       </div>
 
       <div id="formContent" class="form-content">
-        <h1 class="card-title">Join the Waitlist</h1>
-        <p class="card-subtitle">Get early access to FestX - the next generation event platform launching soon</p>
+        <div class="card-content-header">
+          <h2 class="content-label">Join FestX</h2>
+          <h1 class="content-value">Get Early Access</h1>
+        </div>
 
         <form id="waitlistForm" class="card-form">
-          <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
             <input type="email" id="cardEmail" name="email" placeholder="your@email.com" required class="form-input">
-            <button type="submit" class="form-button">Get Notified</button>
           </div>
+          <button type="submit" class="form-button">Join Waitlist</button>
         </form>
-
-        <div class="joined-section">
-          <div class="avatars">
-            <div class="avatar av1">J</div>
-            <div class="avatar av2">A</div>
-            <div class="avatar av3">M</div>
-          </div>
-          <span class="joined-text">~2k+ people already joined</span>
-        </div>
-
-        <div class="countdown">
-          <div class="countdown-item">
-            <div class="countdown-number" id="days">225</div>
-            <div class="countdown-label">days</div>
-          </div>
-          <div class="countdown-sep">|</div>
-          <div class="countdown-item">
-            <div class="countdown-number" id="hours">23</div>
-            <div class="countdown-label">hours</div>
-          </div>
-          <div class="countdown-sep">|</div>
-          <div class="countdown-item">
-            <div class="countdown-number" id="minutes">17</div>
-            <div class="countdown-label">minutes</div>
-          </div>
-          <div class="countdown-sep">|</div>
-          <div class="countdown-item">
-            <div class="countdown-number" id="seconds">58</div>
-            <div class="countdown-label">seconds</div>
-          </div>
-        </div>
       </div>
 
       <div id="successContent" class="success-content" style="display: none;">
@@ -753,30 +671,6 @@ resize();
 window.addEventListener('resize', () => { resize(); });
 requestAnimationFrame(tick);
 
-// Countdown Timer
-function startCountdown() {
-  const updateCountdown = () => {
-    const now = new Date().getTime();
-    const launchDate = new Date(now + (225 * 24 * 60 * 60 * 1000)).getTime();
-    const distance = launchDate - now;
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    document.getElementById('days').textContent = String(days).padStart(2, '0');
-    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
-  };
-
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-}
-
-startCountdown();
-
 // Form Handling
 const waitlistForm = document.getElementById('waitlistForm');
 const formContent = document.getElementById('formContent');
@@ -795,7 +689,7 @@ waitlistForm.addEventListener('submit', async (e) => {
   const button = waitlistForm.querySelector('.form-button');
   const originalText = button.textContent;
   button.disabled = true;
-  button.textContent = 'Joining...';
+  button.textContent = 'JOINING...';
 
   try {
     const response = await fetch('/api/waitlist', {
@@ -804,9 +698,9 @@ waitlistForm.addEventListener('submit', async (e) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        first_name: 'FestX Enthusiast',
+        first_name: 'FestX Fan',
         email: email,
-        phone_number: '+1-0000000000'
+        phone_number: '+'
       })
     });
 
@@ -814,13 +708,13 @@ waitlistForm.addEventListener('submit', async (e) => {
       formContent.style.display = 'none';
       successContent.style.display = 'block';
     } else {
-      alert('Error joining waitlist. Please try again.');
+      alert('Error joining. Try again.');
       button.disabled = false;
       button.textContent = originalText;
     }
   } catch (error) {
     console.error('Error:', error);
-    alert('Error joining waitlist. Please try again.');
+    alert('Error joining. Try again.');
     button.disabled = false;
     button.textContent = originalText;
   }
