@@ -1,0 +1,11 @@
+{
+  "name": "festx",
+  "version": "1.0.0",
+  "description": "FestX waitlist landing page",
+  "scripts": {
+    "dev": "vercel dev"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.38.0"
+  }
+}

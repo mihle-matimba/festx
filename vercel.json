@@ -1,0 +1,8 @@
+{
+  "buildCommand": "npm install",
+  "public": true,
+  "env": [
+    "SUPABASE_URL",
+    "SUPABASE_ANON_KEY"
+  ]
+}
