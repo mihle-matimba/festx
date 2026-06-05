@@ -1,8 +1,0 @@
-{
-  "projectSettings": {
-    "installCommand": "npm install",
-    "buildCommand": null,
-    "outputDirectory": null,
-    "devCommand": null
-  }
-}
