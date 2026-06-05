@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Space Scene</title>
-<link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -324,7 +324,9 @@
   .join-btn {
     padding: 16px 50px;
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 700;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 1px;
     background: rgba(140, 200, 255, 0.15);
     color: rgba(200, 230, 255, 0.95);
     border: 1.5px solid rgba(140, 200, 255, 0.4);
@@ -334,6 +336,7 @@
     box-shadow:
       0 0 20px rgba(100, 180, 255, 0.3),
       inset 0 0 20px rgba(140, 200, 255, 0.1);
+    text-transform: uppercase;
   }
 
   .join-btn:hover {
