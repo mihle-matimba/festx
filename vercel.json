@@ -1,4 +1,8 @@
 {
-  "buildCommand": "npm install",
-  "public": true
+  "projectSettings": {
+    "installCommand": "npm install",
+    "buildCommand": null,
+    "outputDirectory": null,
+    "devCommand": null
+  }
 }
