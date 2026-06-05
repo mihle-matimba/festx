@@ -631,6 +631,42 @@
     font-family: 'Orbitron', sans-serif;
   }
 
+  .already-on-list-content {
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  .already-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: rgba(220, 150, 50, 0.15);
+    border: 1.5px solid rgba(220, 150, 50, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: #ffa500;
+    font-family: 'Orbitron', sans-serif;
+  }
+
+  .already-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 12px;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
+  }
+
+  .already-message {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.6;
+    font-family: 'Orbitron', sans-serif;
+  }
+
   @media (max-width: 640px) {
     .waitlist-card {
       width: 90%;
@@ -718,6 +754,12 @@
         <h3 class="success-title">You're on the list!</h3>
         <p class="success-message">We'll notify you when we launch. Thanks for joining!</p>
       </div>
+
+      <div id="alreadyOnListContent" class="already-on-list-content" style="display: none;">
+        <div class="already-icon">⚡</div>
+        <h3 class="already-title">Already In.</h3>
+        <p class="already-message">You're already on the Evolution. We'll keep you updated!</p>
+      </div>
     </div>
   </div>
 </div>
@@ -796,6 +838,7 @@ let currentStep = 1;
 const waitlistForm = document.getElementById('waitlistForm');
 const formContent = document.getElementById('formContent');
 const successContent = document.getElementById('successContent');
+const alreadyOnListContent = document.getElementById('alreadyOnListContent');
 
 function updateProgressBar() {
   const progressFill = document.getElementById('progressFill');
@@ -881,9 +924,8 @@ waitlistForm.addEventListener('submit', async (e) => {
       formContent.style.display = 'none';
       successContent.style.display = 'block';
     } else if (response.status === 409) {
-      alert("You're already on the list!");
-      button.disabled = false;
-      button.textContent = originalText;
+      formContent.style.display = 'none';
+      alreadyOnListContent.style.display = 'block';
     } else {
       alert('Error joining. Try again.');
       button.disabled = false;
