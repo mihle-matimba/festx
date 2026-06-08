@@ -470,6 +470,25 @@
       line-height: 1.6;
     }
 
+    .btn-link-account {
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      color: white;
+      border: none;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 2rem;
+      animation: fadeInUp 0.8s ease 0.3s both;
+    }
+
+    .btn-link-account:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(255, 61, 0, 0.4);
+    }
+
     .dashboard-image-container {
       display: flex;
       justify-content: center;
@@ -1027,6 +1046,7 @@
     <div class="dashboard-image-container">
       <img src="https://ffxlryusmstnfjedleds.supabase.co/storage/v1/object/public/Assets/Screenshot%202026-06-08%20at%2010.06.33.png" alt="Trading Dashboard" class="dashboard-image">
     </div>
+    <button class="btn-link-account">Link Account</button>
   </section>
 
   <!-- GIVEAWAYS SECTION -->
