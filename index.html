@@ -600,9 +600,8 @@
       display: flex;
       gap: 2rem;
       overflow: hidden;
-      padding: 0;
+      padding: 0 2rem;
       scroll-behavior: smooth;
-      justify-content: center;
     }
 
     .testimonial-card {
@@ -1183,7 +1182,9 @@
 
     function goToSlide(index) {
       currentIndex = index;
-      wrapper.scrollLeft = index * (wrapper.offsetWidth + 32);
+      const cardWidth = 600;
+      const gap = 32;
+      wrapper.scrollLeft = index * (cardWidth + gap);
       updateCards();
       updateDots();
       resetAutoplay();
