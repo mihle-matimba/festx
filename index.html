@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@latest"></script>
   <style>
     :root {
       --bg-primary: #0a0a0a;
@@ -326,7 +327,7 @@
        ───────────────────────────────────────── */
     .features {
       padding: 4rem 2rem;
-      background: var(--bg-secondary);
+      background: radial-gradient(ellipse at center, rgba(255, 61, 0, 0.3) 0%, rgba(255, 61, 0, 0.15) 30%, var(--bg-secondary) 100%);
       animation: fadeInUp 0.8s ease;
     }
 
@@ -381,14 +382,21 @@
     }
 
     .feature-icon {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 1.5rem;
+      color: var(--accent);
+      stroke-width: 1.5;
     }
 
     .feature-card h3 {
       font-size: 1.5rem;
       margin-bottom: 1rem;
       color: var(--text-primary);
+    }
+
+    .feature-card-lifted {
+      transform: translateY(-20px);
     }
 
     .feature-card p {
@@ -896,7 +904,7 @@
       </div>
       <div class="features-grid">
         <div class="feature-card">
-          <div class="feature-icon">📚</div>
+          <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           <h3>Structured Learning</h3>
           <p>Go from zero to confident beginner with our 4+ professional courses.</p>
           <ul class="feature-list">
@@ -906,8 +914,8 @@
           </ul>
           <button class="btn-feature">Browse Course</button>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">👥</div>
+        <div class="feature-card feature-card-lifted">
+          <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           <h3>Community</h3>
           <p>Go from zero to confident beginner with our 4+ professional courses.</p>
           <ul class="feature-list">
@@ -918,7 +926,7 @@
           <button class="btn-feature">Join Community</button>
         </div>
         <div class="feature-card">
-          <div class="feature-icon">⚙️</div>
+          <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
           <h3>Tools</h3>
           <p>Go from zero to confident beginner with our 4+ professional courses.</p>
           <ul class="feature-list">
