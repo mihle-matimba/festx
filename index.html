@@ -315,8 +315,16 @@
       padding: 2rem;
       animation: fadeInUp 0.8s ease 0.2s both;
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .engine-left img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 12px;
     }
 
     .engine-left h2 {
@@ -400,9 +408,16 @@
       text-align: center;
       animation: fadeInUp 0.8s ease 0.3s both;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .engine-right img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 12px;
     }
 
     .pips-value {
@@ -959,23 +974,10 @@
     <h2>Daily Engine</h2>
     <div class="engine-grid">
       <div class="engine-left">
-        <div>
-          <div class="signal-type">SIGNAL.LIVE</div>
-          <div class="signal-pair">EUR/USD</div>
-          <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
-            <div class="signal-details">
-              <div><span>ENTRY</span> <strong>1.0820</strong></div>
-              <div><span>SL</span> <strong>1.0794</strong></div>
-              <div><span>TP</span> <strong>1.0890</strong></div>
-            </div>
-          </div>
-        </div>
+        <img src="https://ffxlryusmstnfjedleds.supabase.co/storage/v1/object/public/Assets/Screenshot%202026-06-08%20at%2009.51.01.png" alt="EUR/USD BUY Signal">
       </div>
       <div class="engine-right">
-        <div class="signal-type" style="border-color: var(--accent); color: var(--accent); margin-bottom: 1rem;">WIN . CLOSED</div>
-        <p class="pips-label">This Week's Performance</p>
-        <div class="pips-value">+400</div>
-        <p class="pips-label">PIPS • EUR/USD</p>
+        <img src="https://ffxlryusmstnfjedleds.supabase.co/storage/v1/object/public/Assets/Screenshot%202026-06-08%20at%2009.51.10.png" alt="Performance Metrics">
       </div>
     </div>
   </section>
