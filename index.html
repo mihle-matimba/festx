@@ -453,10 +453,21 @@
       background: radial-gradient(ellipse at center, rgba(255, 61, 0, 0.3) 0%, rgba(255, 61, 0, 0.15) 40%, rgba(0, 0, 0, 1) 100%);
     }
 
+    .dashboard-header {
+      margin-bottom: 3rem;
+    }
+
     .dashboard-section h2 {
       font-size: 2.5rem;
-      margin-bottom: 3rem;
-      text-align: center;
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+
+    .dashboard-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      line-height: 1.6;
     }
 
     .dashboard-image-container {
@@ -906,7 +917,10 @@
 
   <!-- DASHBOARD SECTION -->
   <section class="dashboard-section">
-    <h2>Intuitive Trading Dashboard</h2>
+    <div class="dashboard-header">
+      <h2>Intuitive Trading Dashboard</h2>
+      <p class="dashboard-subtitle">Monitor your portfolio, analyze trades, and manage your account with our premium interface</p>
+    </div>
     <div class="dashboard-image-container">
       <img src="https://ffxlryusmstnfjedleds.supabase.co/storage/v1/object/public/Assets/Screenshot%202026-06-08%20at%2010.06.33.png" alt="Trading Dashboard" class="dashboard-image">
     </div>
