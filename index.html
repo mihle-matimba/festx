@@ -1,951 +1,1243 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Coming Soon - FestX</title>
-<link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
-<link rel="apple-touch-icon" href="favicon.png">
-<meta name="theme-color" content="#000000">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html, body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: #000;
-    font-size: 16px; /* base — layout uses vw/vh, not em/rem, so font-size changes don't shift anything */
-  }
-
-  canvas#stars {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-  }
-
-  .scene {
-    position: fixed;
-    inset: 0;
-    z-index: 1;
-  }
-
-  /* ─────────────────────────────────────────
-     COMET  — all sizes in vw so it scales
-     ───────────────────────────────────────── */
-  .comet-wrapper {
-    position: absolute;
-    top: 2vh;
-    left: 1vw;
-    width: 24vw;
-    height: 9vw;
-    transform: rotate(-30deg);
-    transform-origin: right center;
-  }
-
-  /* Wide cone tail */
-  .comet-tail {
-    position: absolute;
-    top: 30%;
-    left: 0;
-    width: 78%;
-    height: 40%;
-    background: linear-gradient(to right,
-      transparent 0%,
-      rgba(140,200,255,0.06) 30%,
-      rgba(140,200,255,0.16) 60%,
-      rgba(180,220,255,0.32) 100%);
-    clip-path: polygon(0 50%, 100% 0%, 100% 100%);
-    filter: blur(0.3vw);
-  }
-
-  /* Tighter inner trail */
-  .comet-trail {
-    position: absolute;
-    top: 36%;
-    left: 5%;
-    width: 68%;
-    height: 28%;
-    background: linear-gradient(to right,
-      transparent 0%,
-      rgba(100,180,255,0.10) 40%,
-      rgba(160,210,255,0.28) 100%);
-    clip-path: polygon(0 50%, 100% 5%, 100% 95%);
-    filter: blur(0.2vw);
-  }
-
-  /* ── STREAK LINES (animated) ── */
-  .streak {
-    position: absolute;
-    height: 1.5px;
-    border-radius: 2px;
-    transform-origin: right center;
-  }
-
-  /* Each streak pulses its own width + opacity */
-  @keyframes streak-pulse-1 {
-    0%,100% { width: 56%; opacity: 0.55; }
-    50%      { width: 72%; opacity: 0.85; }
-  }
-  @keyframes streak-pulse-2 {
-    0%,100% { width: 68%; opacity: 0.45; }
-    50%      { width: 80%; opacity: 0.75; }
-  }
-  @keyframes streak-pulse-3 {
-    0%,100% { width: 74%; opacity: 0.60; }
-    50%      { width: 88%; opacity: 0.95; }
-  }
-  @keyframes streak-pulse-4 {
-    0%,100% { width: 62%; opacity: 0.50; }
-    50%      { width: 78%; opacity: 0.80; }
-  }
-  @keyframes streak-pulse-5 {
-    0%,100% { width: 54%; opacity: 0.38; }
-    50%      { width: 70%; opacity: 0.65; }
-  }
-  @keyframes streak-pulse-6 {
-    0%,100% { width: 44%; opacity: 0.32; }
-    50%      { width: 58%; opacity: 0.55; }
-  }
-  @keyframes streak-pulse-7 {
-    0%,100% { width: 36%; opacity: 0.22; }
-    50%      { width: 48%; opacity: 0.42; }
-  }
-
-  /* colour: bright white-blue gradient fading left→transparent */
-  .s1,.s2,.s3,.s4,.s5,.s6,.s7 {
-    background: linear-gradient(to right, transparent, rgba(200,230,255,0.9));
-  }
-  .s1 { top: 22%; animation: streak-pulse-1 1.6s ease-in-out infinite 0.0s; }
-  .s2 { top: 30%; animation: streak-pulse-2 1.9s ease-in-out infinite 0.2s; }
-  .s3 { top: 38%; animation: streak-pulse-3 1.4s ease-in-out infinite 0.4s; }
-  .s4 { top: 46%; animation: streak-pulse-4 1.7s ease-in-out infinite 0.1s; }
-  .s5 { top: 54%; animation: streak-pulse-5 2.0s ease-in-out infinite 0.3s; }
-  .s6 { top: 62%; animation: streak-pulse-6 1.8s ease-in-out infinite 0.5s; }
-  .s7 { top: 70%; animation: streak-pulse-7 2.2s ease-in-out infinite 0.6s; }
-
-  /* ── COMET BODY GLOW PULSE ── */
-  @keyframes comet-glow {
-    0%,100% {
-      box-shadow:
-        0 0 1.2vw 0.4vw rgba(80,160,255,0.75),
-        0 0 2.4vw 0.9vw rgba(50,120,255,0.50),
-        0 0 4vw   1.8vw rgba(30,80,220,0.28),
-        inset 0 0 0.8vw rgba(200,235,255,0.35);
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FEST - Trade Smarter, Grow Faster</title>
+  <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <meta name="theme-color" content="#000000">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #252525;
+      --accent: #FF3D00;
+      --accent-light: #FF6B35;
+      --text-primary: #FFFFFF;
+      --text-secondary: #B0B0B0;
+      --border-color: #3a3a3a;
+      --success: #4CAF50;
+      --chart-gradient: linear-gradient(135deg, #FF3D00 0%, #FF6B35 100%);
     }
-    50% {
-      box-shadow:
-        0 0 1.6vw 0.6vw rgba(100,180,255,0.90),
-        0 0 3.2vw 1.4vw rgba(70,150,255,0.65),
-        0 0 5.5vw 2.5vw rgba(40,100,240,0.38),
-        inset 0 0 1.2vw rgba(220,245,255,0.50);
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-  }
 
-  .comet-body {
-    position: absolute;
-    top: 10%;
-    right: 0;
-    width: 6.5vw;
-    height: 6vw;
-    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
-    background: radial-gradient(ellipse at 35% 40%,
-      #ffffff 0%, #a8e0ff 12%, #4db8ff 28%,
-      #1a8fff 42%, #0055cc 60%, #003399 78%,
-      #001166 92%, #000033 100%);
-    animation: comet-glow 1.8s ease-in-out infinite;
-    filter: brightness(1.15);
-  }
+    html, body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+    }
 
-  /* Inner flame */
-  .comet-body::after {
-    content: '';
-    position: absolute;
-    top: 20%; left: 20%;
-    width: 35%; height: 38%;
-    border-radius: 50%;
-    background: radial-gradient(ellipse, rgba(255,240,180,0.9) 0%, rgba(255,160,60,0.6) 40%, transparent 100%);
-    filter: blur(0.3vw);
-  }
+    body {
+      overflow-x: hidden;
+    }
 
-  /* ─────────────────────────────────────────
-     PLANETS — ALL positions/sizes in vw/vh
-     so font-size changes have zero effect
-     ───────────────────────────────────────── */
-  .planet {
-    position: absolute;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%,
-      #c04030 0%, #8b1a10 35%, #5a0a05 65%, #2a0202 100%);
-    box-shadow: inset -0.4vw -0.3vw 1.2vw rgba(0,0,0,0.7),
-                inset 0.3vw 0.2vw 0.7vw rgba(180,60,40,0.3);
-  }
+    /* ─────────────────────────────────────────
+       HEADER / NAVBAR
+       ───────────────────────────────────────── */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: linear-gradient(180deg, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.8) 100%);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 2rem;
+    }
 
-  .planet::before {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(0,0,0,0.25);
-  }
+    .header-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-  /* Tiny top dot */
-  .p-tiny-top {
-    width: 0.55vw; height: 0.55vw;
-    top: 4.5vh; left: 30.5vw;
-    background: radial-gradient(circle at 35% 30%, #c04030, #5a0a05);
-    box-shadow: none;
-  }
-  .p-tiny-top::before { display: none; }
-
-  /* Small top */
-  .p-sm-top {
-    width: 1.3vw; height: 1.3vw;
-    top: 4vh; left: 30vw;
-  }
-  .p-sm-top::before { width: 0.2vw; height: 0.2vw; top: 30%; left: 30%; }
-
-  /* Medium left */
-  .p-md-left {
-    width: 3.6vw; height: 3.6vw;
-    top: 38vh; left: 10vw;
-  }
-  .p-md-left::before { width: 0.5vw; height: 0.5vw; top: 25%; left: 25%; }
-
-  /* Small right */
-  .p-sm-right {
-    width: 2vw; height: 2vw;
-    top: 22vh; right: 8vw;
-  }
-  .p-sm-right::before { width: 0.3vw; height: 0.3vw; top: 28%; left: 25%; }
-
-  /* Large bottom-left */
-  .p-lg-bottom-left {
-    width: 9.5vw; height: 9.5vw;
-    bottom: 2vh; left: 3vw;
-    background: radial-gradient(circle at 32% 28%,
-      #c84035 0%, #8c1a10 30%, #5c0c06 60%, #2e0303 100%);
-  }
-  .p-lg-bottom-left::before { width: 0.9vw; height: 0.9vw; top: 28%; left: 30%; }
-  .p-lg-bottom-left::after {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-    width: 1.4vw; height: 1.4vw;
-    top: 55%; left: 18%;
-    background: rgba(0,0,0,0.22);
-    box-shadow: 2.2vw 0.8vw 0 -0.45vw rgba(0,0,0,0.18),
-                0.8vw -0.6vw 0 -0.5vw rgba(0,0,0,0.15);
-  }
-
-  /* Tiny mid */
-  .p-sm-mid {
-    width: 1vw; height: 1vw;
-    top: 62vh; left: 36vw;
-    opacity: 0.85;
-  }
-  .p-sm-mid::before { width: 0.15vw; height: 0.15vw; top: 30%; left: 30%; }
-
-  /* XL bottom-right */
-  .p-xl-bottom-right {
-    width: 19vw; height: 19vw;
-    bottom: -4vh; right: -1.5vw;
-    background: radial-gradient(circle at 30% 25%,
-      #c04030 0%, #8b1a10 28%, #5a0a05 58%, #2a0202 88%, #150101 100%);
-  }
-  .p-xl-bottom-right::before { width: 1.3vw; height: 1.3vw; top: 22%; left: 28%; }
-  .p-xl-bottom-right::after {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-    width: 2vw; height: 2vw;
-    top: 42%; left: 20%;
-    background: rgba(0,0,0,0.22);
-    box-shadow:
-      3.3vw -1vw  0 -0.7vw rgba(0,0,0,0.18),
-      5vw    2vw  0 -0.8vw rgba(0,0,0,0.15),
-      1.5vw  3.5vw 0 -0.6vw rgba(0,0,0,0.20);
-  }
-
-  /* ── FLOAT ANIMATIONS ── */
-  @keyframes float-a { 0%,100%{transform:translateY(0)}    50%{transform:translateY(-1.3vh)} }
-  @keyframes float-b { 0%,100%{transform:translateY(0)}    50%{transform:translateY(-0.9vh)} }
-  @keyframes float-c { 0%,100%{transform:translateY(0)}    50%{transform:translateY(-1.6vh)} }
-  @keyframes float-d { 0%,100%{transform:translateY(0)}    50%{transform:translateY(-0.6vh)} }
-  @keyframes float-e { 0%,100%{transform:translateY(0)}    50%{transform:translateY(-1.0vh)} }
-  @keyframes float-f { 0%,100%{transform:translateY(0)}    50%{transform:translateY(-0.75vh)} }
-
-  .p-tiny-top        { animation: float-d 3.5s ease-in-out infinite 0.2s; }
-  .p-sm-top          { animation: float-d 4.2s ease-in-out infinite 0.0s; }
-  .p-md-left         { animation: float-b 5.8s ease-in-out infinite 0.6s; }
-  .p-sm-right        { animation: float-a 4.9s ease-in-out infinite 1.1s; }
-  .p-lg-bottom-left  { animation: float-c 7.2s ease-in-out infinite 0.3s; }
-  .p-sm-mid          { animation: float-e 3.8s ease-in-out infinite 2.0s; }
-  .p-xl-bottom-right { animation: float-f 9.0s ease-in-out infinite 0.8s; }
-
-  /* ─────────────────────────────────────────
-     CONTENT OVERLAY
-     ───────────────────────────────────────── */
-  .content {
-    position: fixed;
-    inset: 0;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none;
-  }
-
-  .content > * {
-    pointer-events: auto;
-  }
-
-  .logo {
-    width: 60vw;
-    max-width: 400px;
-    height: auto;
-    margin-bottom: 40px;
-    animation: fadeIn 0.8s ease-in-out;
-    filter: drop-shadow(0 0 30px rgba(220, 100, 100, 0.6))
-            drop-shadow(0 0 60px rgba(200, 80, 80, 0.4))
-            drop-shadow(0 0 100px rgba(180, 60, 60, 0.2));
-  }
-
-  @media (max-width: 640px) {
     .logo {
-      width: 70vw;
-      margin-bottom: 30px;
-    }
-  }
-
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  .join-btn {
-    padding: 16px 50px;
-    font-size: 18px;
-    font-weight: 700;
-    font-family: 'Orbitron', sans-serif;
-    letter-spacing: 1px;
-    background: rgba(180, 60, 60, 0.15);
-    color: rgba(255, 200, 200, 0.95);
-    border: 1.5px solid rgba(180, 60, 60, 0.5);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow:
-      0 0 20px rgba(200, 80, 80, 0.4),
-      inset 0 0 20px rgba(180, 60, 60, 0.1);
-    text-transform: uppercase;
-  }
-
-  .join-btn:hover {
-    background: rgba(180, 60, 60, 0.25);
-    border-color: rgba(200, 80, 80, 0.7);
-    box-shadow:
-      0 0 30px rgba(220, 100, 100, 0.6),
-      inset 0 0 20px rgba(180, 60, 60, 0.15);
-    transform: translateY(-2px);
-  }
-
-  /* ─────────────────────────────────────────
-     WAITLIST CARD
-     ───────────────────────────────────────── */
-  .waitlist-card {
-    position: relative;
-    width: 420px;
-  }
-
-  .card-glow {
-    position: absolute;
-    inset: -30px;
-    background: radial-gradient(circle, rgba(200, 80, 80, 0.1) 0%, transparent 70%);
-    border-radius: 24px;
-    z-index: -1;
-  }
-
-  .card-inner {
-    backdrop-filter: blur(20px);
-    background: rgba(0, 0, 0, 0.6);
-    border: 1.5px solid rgba(220, 80, 80, 0.5);
-    border-radius: 24px;
-    padding: 40px;
-    position: relative;
-    overflow: hidden;
-    animation: border-pulse 4s cubic-bezier(0.4, 0.0, 0.6, 1.0) infinite;
-  }
-
-  @keyframes border-pulse {
-    0%, 100% {
-      border-color: rgba(220, 80, 80, 0.5);
-      box-shadow:
-        0 0 40px rgba(220, 100, 100, 0.35),
-        0 0 80px rgba(220, 80, 80, 0.2),
-        0 0 120px rgba(200, 60, 60, 0.1);
-    }
-    50% {
-      border-color: rgba(255, 120, 120, 0.8);
-      box-shadow:
-        0 0 60px rgba(255, 120, 120, 0.6),
-        0 0 120px rgba(255, 100, 100, 0.4),
-        0 0 180px rgba(220, 80, 80, 0.2);
-    }
-  }
-
-  .card-inner::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.05), transparent);
-    border-radius: 24px;
-    pointer-events: none;
-  }
-
-  .card-inner::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(255, 255, 255, 0.02), transparent);
-    border-radius: 24px;
-    pointer-events: none;
-  }
-
-  .card-header {
-    text-align: center;
-    margin-bottom: 30px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .card-logo {
-    width: 120px;
-    height: auto;
-    margin: 0 auto;
-  }
-
-  .card-content-header {
-    margin-bottom: 35px;
-    text-align: center;
-  }
-
-  .content-value {
-    font-size: 38px;
-    font-weight: 700;
-    color: #fff;
-    letter-spacing: 0.5px;
-    font-family: 'Orbitron', sans-serif;
-    margin: 0 0 16px 0;
-    line-height: 1.3;
-  }
-
-  .content-label {
-    font-size: 14px;
-    color: rgba(200, 150, 150, 0.9);
-    letter-spacing: 0.5px;
-    font-weight: 400;
-    font-family: 'Orbitron', sans-serif;
-    margin: 0;
-    line-height: 1.5;
-  }
-
-  .progress-bar {
-    width: 100%;
-    height: 3px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 2px;
-    margin-bottom: 30px;
-    overflow: hidden;
-  }
-
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, rgba(220, 100, 100, 0.8), rgba(200, 80, 80, 0.6));
-    width: 33.33%;
-    transition: width 0.3s ease;
-    border-radius: 2px;
-  }
-
-  .card-form {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    position: relative;
-  }
-
-  .form-step {
-    display: none;
-    animation: fadeIn 0.3s ease;
-  }
-
-  .form-step.active {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .form-label {
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.6);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 600;
-  }
-
-  .form-input {
-    padding: 14px 16px;
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(200, 80, 80, 0.3);
-    border-radius: 8px;
-    color: #fff;
-    font-size: 15px;
-    font-family: 'Orbitron', sans-serif;
-    letter-spacing: 0.5px;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-  }
-
-  .form-input::placeholder {
-    color: rgba(255, 255, 255, 0.3);
-  }
-
-  .form-input:focus {
-    outline: none;
-    border-color: rgba(200, 100, 100, 0.6);
-    background: rgba(0, 0, 0, 0.4);
-    box-shadow: 0 0 20px rgba(200, 80, 80, 0.25);
-  }
-
-  .form-button {
-    padding: 14px 24px;
-    background: rgba(200, 80, 80, 0.15);
-    color: rgba(255, 200, 200, 0.95);
-    border: 1.5px solid rgba(200, 80, 80, 0.4);
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 700;
-    font-family: 'Orbitron', sans-serif;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 0 20px rgba(200, 80, 80, 0.2);
-  }
-
-  .form-button:hover {
-    background: rgba(200, 80, 80, 0.25);
-    border-color: rgba(200, 100, 100, 0.6);
-    box-shadow: 0 0 30px rgba(220, 100, 100, 0.4);
-    transform: translateY(-2px);
-  }
-
-  .form-button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-
-  .button-group {
-    display: flex;
-    gap: 12px;
-  }
-
-  .button-group .form-button {
-    flex: 1;
-  }
-
-  .form-button-back {
-    flex: 1;
-    padding: 14px 24px;
-    background: rgba(100, 100, 100, 0.15);
-    color: rgba(200, 200, 200, 0.95);
-    border: 1.5px solid rgba(100, 100, 100, 0.3);
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 700;
-    font-family: 'Orbitron', sans-serif;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 0 15px rgba(100, 100, 100, 0.15);
-  }
-
-  .form-button-back:hover {
-    background: rgba(100, 100, 100, 0.25);
-    border-color: rgba(120, 120, 120, 0.5);
-    box-shadow: 0 0 20px rgba(100, 100, 100, 0.25);
-    transform: translateY(-2px);
-  }
-
-  .success-content {
-    text-align: center;
-    padding: 20px 0;
-  }
-
-  .success-icon {
-    width: 60px;
-    height: 60px;
-    margin: 0 auto 20px;
-    border-radius: 50%;
-    background: rgba(76, 175, 80, 0.15);
-    border: 1.5px solid rgba(76, 175, 80, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    color: #4caf50;
-    font-family: 'Orbitron', sans-serif;
-  }
-
-  .success-title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 12px;
-    font-family: 'Orbitron', sans-serif;
-    letter-spacing: 0.5px;
-  }
-
-  .success-message {
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.6;
-    font-family: 'Orbitron', sans-serif;
-  }
-
-  .already-on-list-content {
-    text-align: center;
-    padding: 20px 0;
-  }
-
-  .already-icon {
-    width: 60px;
-    height: 60px;
-    margin: 0 auto 20px;
-    border-radius: 50%;
-    background: rgba(220, 150, 50, 0.15);
-    border: 1.5px solid rgba(220, 150, 50, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    color: #ffa500;
-    font-family: 'Orbitron', sans-serif;
-  }
-
-  .already-title {
-    font-size: 28px;
-    font-weight: 800;
-    color: #fff;
-    margin-bottom: 12px;
-    font-family: 'Orbitron', sans-serif;
-    letter-spacing: 1px;
-  }
-
-  .already-message {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.75);
-    line-height: 1.6;
-    font-family: 'Orbitron', sans-serif;
-  }
-
-  @media (max-width: 640px) {
-    .waitlist-card {
-      width: 90%;
-      max-width: 420px;
+      font-size: 1.75rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 2px;
     }
 
-    .card-inner {
-      padding: 30px 24px;
+    nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
     }
 
-    .card-title {
-      font-size: 24px;
+    nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
     }
 
-    .form-row {
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    .btn-signup {
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-signup:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 61, 0, 0.3);
+    }
+
+    /* Mobile Menu */
+    .menu-toggle {
+      display: none;
       flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
     }
 
-    .form-button {
-      width: 100%;
+    .menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: all 0.3s ease;
     }
-  }
-</style>
+
+    /* ─────────────────────────────────────────
+       HERO SECTION
+       ───────────────────────────────────────── */
+    .hero {
+      margin-top: 60px;
+      padding: 4rem 2rem;
+      text-align: center;
+      animation: fadeInDown 0.8s ease;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 8vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+      animation: fadeInUp 0.8s ease 0.1s both;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      animation: fadeInUp 0.8s ease 0.2s both;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.8s ease 0.3s both;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      color: white;
+      border: none;
+      padding: 1rem 2.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(255, 61, 0, 0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--accent);
+      border: 2px solid var(--accent);
+      padding: 1rem 2.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 61, 0, 0.1);
+      transform: translateY(-4px);
+    }
+
+    .metrics-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .metric-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      padding: 1.5rem;
+      border-radius: 12px;
+      animation: fadeInUp 0.8s ease 0.4s both;
+      transition: all 0.3s ease;
+    }
+
+    .metric-card:hover {
+      background: #333;
+      border-color: var(--accent);
+    }
+
+    .metric-label {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .metric-value {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .metric-change {
+      font-size: 0.9rem;
+      color: var(--success);
+    }
+
+    .metric-change.negative {
+      color: var(--text-secondary);
+    }
+
+    /* ─────────────────────────────────────────
+       CHART SECTION
+       ───────────────────────────────────────── */
+    .chart-section {
+      padding: 4rem 2rem;
+      background: linear-gradient(180deg, rgba(255, 61, 0, 0.05) 0%, transparent 100%);
+      margin-top: 2rem;
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .chart-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .chart-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .chart-revenue {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .chart-revenue .positive {
+      color: var(--success);
+    }
+
+    .chart-canvas {
+      width: 100%;
+      height: 300px;
+      position: relative;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ─────────────────────────────────────────
+       DAILY ENGINE SECTION
+       ───────────────────────────────────────── */
+    .daily-engine {
+      padding: 4rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .engine-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .engine-left h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      animation: fadeInUp 0.8s ease 0.1s both;
+    }
+
+    .signal-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      animation: fadeInUp 0.8s ease 0.2s both;
+      transition: all 0.3s ease;
+    }
+
+    .signal-card:hover {
+      border-color: var(--accent);
+      background: #333;
+    }
+
+    .signal-pair {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .signal-type {
+      display: inline-block;
+      background: var(--success);
+      color: #000;
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+    }
+
+    .signal-details {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .signal-details div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .engine-right {
+      text-align: center;
+      animation: fadeInUp 0.8s ease 0.3s both;
+    }
+
+    .pips-value {
+      font-size: clamp(2rem, 10vw, 5rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 1rem 0;
+    }
+
+    .pips-label {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+    }
+
+    /* ─────────────────────────────────────────
+       FEATURES SECTION
+       ───────────────────────────────────────── */
+    .features {
+      padding: 4rem 2rem;
+      background: var(--bg-secondary);
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .features-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .features h2 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      animation: fadeInUp 0.8s ease 0.1s both;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      padding: 2rem;
+      border-radius: 12px;
+      animation: fadeInUp 0.8s ease 0.2s both;
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      border-color: var(--accent);
+      background: #1a1a1a;
+      transform: translateY(-4px);
+    }
+
+    .feature-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    .feature-card p {
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .feature-list {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-list li {
+      color: var(--text-secondary);
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .feature-list li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .btn-feature {
+      width: 100%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-feature:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 61, 0, 0.3);
+    }
+
+    /* ─────────────────────────────────────────
+       DASHBOARD SECTION
+       ───────────────────────────────────────── */
+    .dashboard-section {
+      padding: 4rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .dashboard-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .dashboard-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      padding: 2rem;
+      border-radius: 12px;
+      animation: fadeInUp 0.8s ease 0.2s both;
+      transition: all 0.3s ease;
+    }
+
+    .dashboard-card:hover {
+      border-color: var(--accent);
+      background: #333;
+    }
+
+    .dashboard-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: var(--accent);
+    }
+
+    .dashboard-stat {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .dashboard-stat:last-child {
+      border-bottom: none;
+    }
+
+    .stat-label {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .stat-value {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .stat-value.positive {
+      color: var(--success);
+    }
+
+    /* ─────────────────────────────────────────
+       GIVEAWAYS SECTION
+       ───────────────────────────────────────── */
+    .giveaways {
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, rgba(255, 61, 0, 0.1) 0%, rgba(10, 10, 10, 1) 100%);
+      text-align: center;
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .giveaways-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .giveaway-emoji {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    .giveaways h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .giveaways p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+
+    .btn-giveaway {
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-giveaway:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(255, 61, 0, 0.4);
+    }
+
+    /* ─────────────────────────────────────────
+       TESTIMONIALS SECTION
+       ───────────────────────────────────────── */
+    .testimonials {
+      padding: 4rem 2rem;
+      background: var(--bg-secondary);
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .testimonials-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .testimonials h2 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .testimonial-card {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      padding: 2rem;
+      border-radius: 12px;
+      animation: fadeInUp 0.8s ease 0.2s both;
+      transition: all 0.3s ease;
+    }
+
+    .testimonial-card:hover {
+      border-color: var(--accent);
+      background: #1a1a1a;
+    }
+
+    .testimonial-quote {
+      font-style: italic;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .author-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+
+    .author-name {
+      font-weight: 600;
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--border-color);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .dot.active {
+      background: var(--accent);
+      transform: scale(1.3);
+    }
+
+    /* ─────────────────────────────────────────
+       FOOTER
+       ───────────────────────────────────────── */
+    footer {
+      padding: 3rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border-color);
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .footer-logo {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+    }
+
+    .footer-copyright {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    /* ─────────────────────────────────────────
+       ANIMATIONS
+       ───────────────────────────────────────── */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ─────────────────────────────────────────
+       RESPONSIVE DESIGN
+       ───────────────────────────────────────── */
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem;
+      }
+
+      .header-container {
+        justify-content: space-between;
+      }
+
+      nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: var(--bg-primary);
+        border-bottom: 1px solid var(--border-color);
+        padding: 1rem;
+        gap: 1rem;
+      }
+
+      nav.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 8px);
+      }
+
+      .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+      }
+
+      .hero {
+        margin-top: 70px;
+        padding: 2rem 1rem;
+      }
+
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .btn-primary, .btn-secondary {
+        width: 100%;
+      }
+
+      .metrics-cards {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .engine-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .engine-left h2 {
+        font-size: 1.8rem;
+      }
+
+      .pips-value {
+        font-size: 2.5rem;
+      }
+
+      .features-grid, .testimonials-grid, .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .chart-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .chart-canvas {
+        height: 250px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 0.75rem;
+      }
+
+      .logo {
+        font-size: 1.25rem;
+      }
+
+      .btn-signup {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+      }
+
+      .hero {
+        margin-top: 60px;
+        padding: 1.5rem 1rem;
+      }
+
+      .hero h1 {
+        font-size: 1.5rem;
+      }
+
+      .metrics-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .metric-card {
+        padding: 1rem;
+      }
+
+      .features h2, .dashboard-section h2, .testimonials h2, .giveaways h2 {
+        font-size: 1.8rem;
+      }
+
+      .feature-card, .dashboard-card, .testimonial-card, .signal-card {
+        padding: 1.5rem;
+      }
+
+      .giveaway-emoji {
+        font-size: 3rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<canvas id="stars"></canvas>
+  <!-- HEADER -->
+  <header>
+    <div class="header-container">
+      <div class="logo">FEST</div>
+      <button class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="navMenu">
+        <a href="#home">Home</a>
+        <a href="#community">Community</a>
+        <a href="#contact">Contact</a>
+        <button class="btn-signup">Sign Up Now</button>
+      </nav>
+    </div>
+  </header>
 
-<div class="content">
-  <div class="waitlist-card">
-    <div class="card-glow"></div>
-    <div class="card-inner">
-      <div class="card-header">
-        <img src="https://ffxlryusmstnfjedleds.supabase.co/storage/v1/object/public/Assets/festxlogocolour.png" alt="FestX Logo" class="card-logo">
-      </div>
-
-      <div id="formContent" class="form-content">
-        <div class="card-content-header">
-          <h1 class="content-value">The Evolution Starts Here</h1>
-          <h2 class="content-label">Unlimited Opportunity</h2>
-        </div>
-
-        <div class="progress-bar">
-          <div class="progress-fill" id="progressFill"></div>
-        </div>
-
-        <form id="waitlistForm" class="card-form">
-          <!-- Step 1: Email -->
-          <div class="form-step active" id="step1">
-            <div class="form-group">
-              <label class="form-label">Email Address</label>
-              <input type="email" id="cardEmail" name="email" placeholder="your@email.com" required class="form-input">
-            </div>
-            <button type="button" class="form-button" onclick="nextStep(1)">Next</button>
-          </div>
-
-          <!-- Step 2: First Name -->
-          <div class="form-step" id="step2">
-            <div class="form-group">
-              <label class="form-label">First Name</label>
-              <input type="text" id="cardFirstName" name="firstName" placeholder="John" required class="form-input">
-            </div>
-            <div class="button-group">
-              <button type="button" class="form-button-back" onclick="prevStep(2)">Back</button>
-              <button type="button" class="form-button" onclick="nextStep(2)">Next</button>
-            </div>
-          </div>
-
-          <!-- Step 3: Phone Number -->
-          <div class="form-step" id="step3">
-            <div class="form-group">
-              <label class="form-label">Phone Number</label>
-              <input type="tel" id="cardPhone" name="phone" placeholder="+1 (555) 000-0000" required class="form-input">
-            </div>
-            <div class="button-group">
-              <button type="button" class="form-button-back" onclick="prevStep(3)">Back</button>
-              <button type="submit" class="form-button">Join Waitlist</button>
-            </div>
-          </div>
-        </form>
-      </div>
-
-      <div id="successContent" class="success-content" style="display: none;">
-        <div class="success-icon">✓</div>
-        <h3 class="success-title">You're on the list!</h3>
-        <p class="success-message">We'll notify you when we launch. Thanks for joining!</p>
-      </div>
-
-      <div id="alreadyOnListContent" class="already-on-list-content" style="display: none;">
-        <div class="already-icon">⚡</div>
-        <h3 class="already-title">Already In.</h3>
-        <p class="already-message">You're already on the Evolution. We'll keep you updated!</p>
+  <!-- HERO SECTION -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>Trade Smarter<br>Grow Faster</h1>
+      <p class="hero-subtitle">Master the markets with professional-grade tools and real-time insights from our community of traders.</p>
+      <div class="hero-buttons">
+        <button class="btn-primary">Get Started</button>
+        <button class="btn-secondary">Learn More</button>
       </div>
     </div>
-  </div>
-</div>
+    <div class="metrics-cards">
+      <div class="metric-card">
+        <div class="metric-label">Average Win</div>
+        <div class="metric-value">50.8K</div>
+        <div class="metric-change">↑ 28.4%</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Average Loss</div>
+        <div class="metric-value">-14.6K</div>
+        <div class="metric-change negative">↓ 12.6%</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Winrate</div>
+        <div class="metric-value">66%</div>
+        <div class="metric-change">↑ 3.1%</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Risk-Reward</div>
+        <div class="metric-value">1:3</div>
+        <div class="metric-change">↑ 11.3%</div>
+      </div>
+    </div>
+  </section>
 
-<div class="scene">
+  <!-- CHART SECTION -->
+  <section class="chart-section">
+    <div class="chart-container">
+      <div class="chart-header">
+        <h3 class="chart-title">Profit Weekly Challenge Jun 2025 - Dec 2025</h3>
+        <div class="chart-revenue">
+          <span>Total Revenue: $240.8K</span>
+          <span class="positive">↑ 24.6%</span>
+        </div>
+      </div>
+      <div class="chart-canvas">
+        <svg viewBox="0 0 1000 300" preserveAspectRatio="xMidYMid meet">
+          <!-- Grid lines -->
+          <defs>
+            <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#FF3D00;stop-opacity:0.3" />
+              <stop offset="100%" style="stop-color:#FF3D00;stop-opacity:0" />
+            </linearGradient>
+          </defs>
 
-  <!-- COMET -->
-  <div class="comet-wrapper">
-    <div class="comet-tail"></div>
-    <div class="comet-trail"></div>
-    <div class="streak s1"></div>
-    <div class="streak s2"></div>
-    <div class="streak s3"></div>
-    <div class="streak s4"></div>
-    <div class="streak s5"></div>
-    <div class="streak s6"></div>
-    <div class="streak s7"></div>
-    <div class="comet-body"></div>
-  </div>
+          <!-- Y-axis grid lines -->
+          <line x1="60" y1="30" x2="1000" y2="30" stroke="#444" stroke-width="1" stroke-dasharray="5,5" />
+          <line x1="60" y1="100" x2="1000" y2="100" stroke="#444" stroke-width="1" stroke-dasharray="5,5" />
+          <line x1="60" y1="170" x2="1000" y2="170" stroke="#444" stroke-width="1" stroke-dasharray="5,5" />
+          <line x1="60" y1="240" x2="1000" y2="240" stroke="#444" stroke-width="1" stroke-dasharray="5,5" />
 
-  <!-- PLANETS -->
-  <div class="planet p-tiny-top"></div>
-  <div class="planet p-sm-top"></div>
-  <div class="planet p-md-left"></div>
-  <div class="planet p-sm-right"></div>
-  <div class="planet p-lg-bottom-left"></div>
-  <div class="planet p-sm-mid"></div>
-  <div class="planet p-xl-bottom-right"></div>
+          <!-- Axes -->
+          <line x1="60" y1="20" x2="60" y2="260" stroke="#666" stroke-width="2" />
+          <line x1="60" y1="260" x2="1000" y2="260" stroke="#666" stroke-width="2" />
 
-</div>
+          <!-- Y-axis labels -->
+          <text x="40" y="35" font-size="12" fill="#B0B0B0" text-anchor="end">250K</text>
+          <text x="40" y="105" font-size="12" fill="#B0B0B0" text-anchor="end">180K</text>
+          <text x="40" y="175" font-size="12" fill="#B0B0B0" text-anchor="end">120K</text>
+          <text x="40" y="245" font-size="12" fill="#B0B0B0" text-anchor="end">50K</text>
 
-<script>
-const canvas = document.getElementById('stars');
-const ctx = canvas.getContext('2d');
-let stars = [];
+          <!-- X-axis labels -->
+          <text x="150" y="280" font-size="12" fill="#B0B0B0" text-anchor="middle">Jun</text>
+          <text x="300" y="280" font-size="12" fill="#B0B0B0" text-anchor="middle">Jul</text>
+          <text x="450" y="280" font-size="12" fill="#B0B0B0" text-anchor="middle">Aug</text>
+          <text x="600" y="280" font-size="12" fill="#B0B0B0" text-anchor="middle">Sep</text>
+          <text x="750" y="280" font-size="12" fill="#B0B0B0" text-anchor="middle">Oct</text>
+          <text x="900" y="280" font-size="12" fill="#B0B0B0" text-anchor="middle">Nov</text>
 
-function buildStars() {
-  stars = [];
-  for (let i = 0; i < 520; i++) {
-    stars.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      r: 0.3 + Math.random() * 1.1,
-      base:  0.55 + Math.random() * 0.45,
-      speed: 0.5  + Math.random() * 2.5,
-      phase: Math.random() * Math.PI * 2
+          <!-- Area under curve -->
+          <polygon points="80,180 150,140 220,130 290,110 360,95 430,80 500,70 570,75 640,85 710,95 780,110 850,125 920,140 990,155 990,260 80,260" fill="url(#areaGradient)" />
+
+          <!-- Line chart -->
+          <polyline points="80,180 150,140 220,130 290,110 360,95 430,80 500,70 570,75 640,85 710,95 780,110 850,125 920,140 990,155" fill="none" stroke="#FF3D00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+
+          <!-- Data points -->
+          <circle cx="80" cy="180" r="4" fill="#FF6B35" />
+          <circle cx="150" cy="140" r="4" fill="#FF6B35" />
+          <circle cx="220" cy="130" r="4" fill="#FF6B35" />
+          <circle cx="290" cy="110" r="4" fill="#FF6B35" />
+          <circle cx="360" cy="95" r="4" fill="#FF6B35" />
+          <circle cx="430" cy="80" r="4" fill="#FF6B35" />
+          <circle cx="500" cy="70" r="4" fill="#FF6B35" />
+          <circle cx="570" cy="75" r="4" fill="#FF6B35" />
+          <circle cx="640" cy="85" r="4" fill="#FF6B35" />
+          <circle cx="710" cy="95" r="4" fill="#FF6B35" />
+          <circle cx="780" cy="110" r="4" fill="#FF6B35" />
+          <circle cx="850" cy="125" r="4" fill="#FF6B35" />
+          <circle cx="920" cy="140" r="4" fill="#FF6B35" />
+          <circle cx="990" cy="155" r="4" fill="#FF6B35" />
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- DAILY ENGINE SECTION -->
+  <section class="daily-engine">
+    <div class="engine-grid">
+      <div class="engine-left">
+        <h2>Daily Engine</h2>
+        <div class="signal-card">
+          <div class="signal-pair">EUR/USD</div>
+          <div class="signal-type">BUY</div>
+          <div class="signal-details">
+            <div><span>Entry:</span> <strong>1.0820</strong></div>
+            <div><span>Stop Loss:</span> <strong>1.0794</strong></div>
+            <div><span>Take Profit:</span> <strong>1.0890</strong></div>
+          </div>
+        </div>
+      </div>
+      <div class="engine-right">
+        <p class="pips-label">This Week's Performance</p>
+        <div class="pips-value">+400 PIPS</div>
+        <p class="pips-label">EUR/USD</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section class="features" id="community">
+    <div class="features-container">
+      <h2>Everything you need to conquer the markets</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>Education</h3>
+          <p>Learn from industry experts with comprehensive courses, webinars, and trading strategies tailored to all skill levels.</p>
+          <ul class="feature-list">
+            <li>Beginner to Advanced Courses</li>
+            <li>Live Trading Sessions</li>
+            <li>Strategy Breakdowns</li>
+          </ul>
+          <button class="btn-feature">Explore Courses</button>
+        </div>
+        <div class="feature-card">
+          <h3>Private Hubs</h3>
+          <p>Join exclusive communities of successful traders sharing signals, strategies, and real-time market analysis.</p>
+          <ul class="feature-list">
+            <li>Exclusive Signals</li>
+            <li>Community Trading Ideas</li>
+            <li>Member-Only Events</li>
+          </ul>
+          <button class="btn-feature">Join Community</button>
+        </div>
+        <div class="feature-card">
+          <h3>Community Tools</h3>
+          <p>Access powerful trading tools, analytics dashboards, and portfolio trackers to optimize your trading performance.</p>
+          <ul class="feature-list">
+            <li>Advanced Analytics</li>
+            <li>Portfolio Tracker</li>
+            <li>Real-Time Alerts</li>
+          </ul>
+          <button class="btn-feature">View Tools</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DASHBOARD SECTION -->
+  <section class="dashboard-section">
+    <h2>Intuitive Trading Dashboard</h2>
+    <div class="dashboard-grid">
+      <div class="dashboard-card">
+        <h3>Wallet Overview</h3>
+        <div class="dashboard-stat">
+          <span class="stat-label">Total Balance</span>
+          <span class="stat-value">$127,482.50</span>
+        </div>
+        <div class="dashboard-stat">
+          <span class="stat-label">Change</span>
+          <span class="stat-value positive">+12%</span>
+        </div>
+        <div class="dashboard-stat">
+          <span class="stat-label">Available</span>
+          <span class="stat-value">$95,240.00</span>
+        </div>
+        <div class="dashboard-stat">
+          <span class="stat-label">In Positions</span>
+          <span class="stat-value">$32,242.50</span>
+        </div>
+      </div>
+      <div class="dashboard-card">
+        <h3>Performance</h3>
+        <div class="dashboard-stat">
+          <span class="stat-label">Win Rate</span>
+          <span class="stat-value">57.9%</span>
+        </div>
+        <div class="dashboard-stat">
+          <span class="stat-label">Profit Factor</span>
+          <span class="stat-value">2.35</span>
+        </div>
+        <div class="dashboard-stat">
+          <span class="stat-label">ROI</span>
+          <span class="stat-value positive">+45.5%</span>
+        </div>
+      </div>
+      <div class="dashboard-card">
+        <h3>Recent Trades</h3>
+        <div class="dashboard-stat">
+          <span class="stat-label">EUR/USD</span>
+          <span class="stat-value positive">+453.80</span>
+        </div>
+        <div class="dashboard-stat">
+          <span class="stat-label">GBP/JPY</span>
+          <span class="stat-value positive">+128.67</span>
+        </div>
+        <div class="dashboard-stat">
+          <span class="stat-label">BTC/USD</span>
+          <span class="stat-value positive">+$78.45</span>
+        </div>
+      </div>
+      <div class="dashboard-card">
+        <h3>Asset Allocation</h3>
+        <div class="dashboard-stat">
+          <span class="stat-label">Forex</span>
+          <span class="stat-value">40%</span>
+        </div>
+        <div class="dashboard-stat">
+          <span class="stat-label">Crypto</span>
+          <span class="stat-value">25%</span>
+        </div>
+        <div class="dashboard-stat">
+          <span class="stat-label">Commodities</span>
+          <span class="stat-value">18%</span>
+        </div>
+        <div class="dashboard-stat">
+          <span class="stat-label">Stocks</span>
+          <span class="stat-value">17%</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GIVEAWAYS SECTION -->
+  <section class="giveaways" id="contact">
+    <div class="giveaways-container">
+      <div class="giveaway-emoji">🎁</div>
+      <h2>Life-Changing Giveaways</h2>
+      <p>Join our community and get a chance to win premium trading tools, exclusive access, and trading capital. New prizes every month!</p>
+      <button class="btn-giveaway">Enter Now</button>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS SECTION -->
+  <section class="testimonials">
+    <div class="testimonials-container">
+      <h2>What our people say?</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"FEST transformed my trading journey. The community support and tools are unmatched. I've grown my account by 45% in just 3 months!"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">AJ</div>
+            <div>
+              <div class="author-name">Alex Johnson</div>
+              <div style="font-size: 0.85rem; color: var(--text-secondary);">Professional Trader</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"The daily signals and private hubs have given me confidence in my trades. This is exactly what I needed to level up my game."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">SM</div>
+            <div>
+              <div class="author-name">Sarah Miller</div>
+              <div style="font-size: 0.85rem; color: var(--text-secondary);">Day Trader</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"Best platform I've used. The educational resources are comprehensive, and the community is incredibly helpful and supportive."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">MC</div>
+            <div>
+              <div class="author-name">Michael Chen</div>
+              <div style="font-size: 0.85rem; color: var(--text-secondary);">Swing Trader</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-dots">
+        <div class="dot active" data-slide="0"></div>
+        <div class="dot" data-slide="1"></div>
+        <div class="dot" data-slide="2"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">FEST</div>
+    <p class="footer-copyright">&copy; 2025 FEST Trading Platform. All rights reserved. | Trade Smarter, Grow Faster</p>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      navMenu.classList.toggle('active');
     });
-  }
-}
 
-function resize() {
-  canvas.width  = window.innerWidth;
-  canvas.height = window.innerHeight;
-  buildStars();
-}
-
-function tick(t) {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  const ts = t * 0.001;
-  for (const s of stars) {
-    const alpha = Math.max(0, Math.min(1, s.base + Math.sin(ts * s.speed + s.phase) * 0.45));
-    ctx.beginPath();
-    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(255,255,255,${alpha})`;
-    ctx.fill();
-  }
-  requestAnimationFrame(tick);
-}
-
-resize();
-window.addEventListener('resize', () => { resize(); });
-requestAnimationFrame(tick);
-
-// Multi-step Form Handling
-let currentStep = 1;
-const waitlistForm = document.getElementById('waitlistForm');
-const formContent = document.getElementById('formContent');
-const successContent = document.getElementById('successContent');
-const alreadyOnListContent = document.getElementById('alreadyOnListContent');
-
-function updateProgressBar() {
-  const progressFill = document.getElementById('progressFill');
-  progressFill.style.width = (currentStep * 33.33) + '%';
-}
-
-function showStep(step) {
-  // Hide all steps
-  document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
-
-  // Show current step
-  document.getElementById(`step${step}`).classList.add('active');
-  updateProgressBar();
-}
-
-function nextStep(step) {
-  const email = document.getElementById('cardEmail').value.trim();
-  const firstName = document.getElementById('cardFirstName').value.trim();
-
-  if (step === 1) {
-    if (!email || !email.includes('@')) {
-      alert('Please enter a valid email');
-      return;
-    }
-    currentStep = 2;
-  } else if (step === 2) {
-    if (!firstName) {
-      alert('Please enter your first name');
-      return;
-    }
-    currentStep = 3;
-  }
-
-  showStep(currentStep);
-}
-
-function prevStep(step) {
-  currentStep = step - 1;
-  showStep(currentStep);
-}
-
-waitlistForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-
-  const email = document.getElementById('cardEmail').value.trim();
-  const firstName = document.getElementById('cardFirstName').value.trim();
-  const phone = document.getElementById('cardPhone').value.trim();
-
-  if (!email || !email.includes('@')) {
-    alert('Please enter a valid email');
-    return;
-  }
-
-  if (!firstName) {
-    alert('Please enter your first name');
-    return;
-  }
-
-  if (!phone || phone.length < 10) {
-    alert('Please enter a valid phone number');
-    return;
-  }
-
-  const button = waitlistForm.querySelector('[type="submit"]');
-  const originalText = button.textContent;
-  button.disabled = true;
-  button.textContent = 'JOINING...';
-
-  try {
-    const response = await fetch('/api/waitlist', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        first_name: firstName,
-        email: email,
-        phone_number: phone
-      })
+    // Close menu when a link is clicked
+    navMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+      });
     });
 
-    if (response.ok) {
-      formContent.style.display = 'none';
-      successContent.style.display = 'block';
-    } else if (response.status === 409) {
-      formContent.style.display = 'none';
-      alreadyOnListContent.style.display = 'block';
-    } else {
-      alert('Error joining. Try again.');
-      button.disabled = false;
-      button.textContent = originalText;
-    }
-  } catch (error) {
-    console.error('Error:', error);
-    alert('Error joining. Try again.');
-    button.disabled = false;
-    button.textContent = originalText;
-  }
-});
+    // Carousel dots functionality
+    const dots = document.querySelectorAll('.dot');
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        dots.forEach(d => d.classList.remove('active'));
+        dot.classList.add('active');
+      });
+    });
 
-// Initialize first step
-showStep(1);
-</script>
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Stagger animations on load
+    window.addEventListener('load', () => {
+      document.querySelectorAll('[class*="fadeIn"]').forEach((el, index) => {
+        el.style.animationDelay = `${index * 0.1}s`;
+      });
+    });
+  </script>
+
 </body>
 </html>
