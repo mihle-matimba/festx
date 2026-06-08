@@ -62,18 +62,18 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 2rem;
+      gap: 3rem;
     }
 
     .logo {
-      height: 100px;
-      width: 100px;
       display: flex;
       align-items: center;
-      justify-content: center;
+      gap: 0.75rem;
       cursor: pointer;
       transition: transform 0.3s ease;
       flex-shrink: 0;
+      text-decoration: none;
+      color: var(--text-primary);
     }
 
     .logo:hover {
@@ -81,9 +81,16 @@
     }
 
     .logo img {
-      height: 100%;
-      width: 100%;
+      height: 60px;
+      width: 60px;
       object-fit: contain;
+    }
+
+    .logo-text {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      white-space: nowrap;
     }
 
     nav {
@@ -908,6 +915,7 @@
     <div class="header-container">
       <a href="#home" class="logo">
         <img src="https://ffxlryusmstnfjedleds.supabase.co/storage/v1/object/public/Assets/festxlogocolour.png" alt="FEST Logo">
+        <span class="logo-text">FEST</span>
       </a>
       <button class="menu-toggle" id="menuToggle">
         <span></span>
