@@ -161,9 +161,32 @@
       position: relative;
     }
 
-    .hero-content {
-      max-width: 900px;
+    .hero-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      max-width: 1400px;
       margin: 0 auto;
+    }
+
+    .hero-content {
+      max-width: 600px;
+      text-align: left;
+    }
+
+    .hero-image {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeInUp 0.8s ease 0.4s both;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(255, 61, 0, 0.2);
     }
 
     .hero h1 {
@@ -820,6 +843,14 @@
         padding: 2rem 1rem;
       }
 
+      .hero-wrapper {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-content {
+        text-align: center;
+      }
+
       .hero h1 {
         font-size: 1.8rem;
       }
@@ -932,12 +963,17 @@
 
   <!-- HERO SECTION -->
   <section class="hero" id="home">
-    <div class="hero-content">
-      <h1>Trade Smarter<br>Grow Faster</h1>
-      <p class="hero-subtitle">Everything you need to start trading with confidence.</p>
-      <div class="hero-buttons">
-        <button class="btn-primary">Get Started</button>
-        <button class="btn-secondary">Learn More</button>
+    <div class="hero-wrapper">
+      <div class="hero-content">
+        <h1>Trade Smarter<br>Grow Faster</h1>
+        <p class="hero-subtitle">Everything you need to start trading with confidence.</p>
+        <div class="hero-buttons">
+          <button class="btn-primary">Get Started</button>
+          <button class="btn-secondary">Learn More</button>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="https://ffxlryusmstnfjedleds.supabase.co/storage/v1/object/public/Assets/Screenshot%202026-06-08%20at%2009.41.19.png" alt="Trading Dashboard">
       </div>
     </div>
     <div class="metrics-cards">
