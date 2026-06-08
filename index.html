@@ -490,48 +490,25 @@
        ───────────────────────────────────────── */
     .giveaways {
       padding: 4rem 2rem;
-      background: linear-gradient(135deg, rgba(255, 61, 0, 0.1) 0%, rgba(10, 10, 10, 1) 100%);
+      background: var(--bg-primary);
       text-align: center;
       animation: fadeInUp 0.8s ease;
     }
 
     .giveaways-container {
-      max-width: 800px;
+      max-width: 1000px;
       margin: 0 auto;
+      display: flex;
+      justify-content: center;
     }
 
-    .giveaway-emoji {
-      font-size: 4rem;
-      margin-bottom: 1rem;
-    }
-
-    .giveaways h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .giveaways p {
-      color: var(--text-secondary);
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
-      line-height: 1.8;
-    }
-
-    .btn-giveaway {
-      background: linear-gradient(135deg, var(--accent), var(--accent-light));
-      color: white;
-      border: none;
-      padding: 1rem 2rem;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .btn-giveaway:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(255, 61, 0, 0.4);
+    .giveaway-image {
+      width: 100%;
+      height: auto;
+      max-width: 900px;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(255, 61, 0, 0.2);
+      animation: fadeInUp 0.8s ease 0.1s both;
     }
 
     /* ─────────────────────────────────────────
@@ -929,10 +906,7 @@
   <!-- GIVEAWAYS SECTION -->
   <section class="giveaways" id="contact">
     <div class="giveaways-container">
-      <div class="giveaway-emoji">🎁</div>
-      <h2>Life-Changing Giveaways</h2>
-      <p>Join our community and get a chance to win premium trading tools, exclusive access, and trading capital. New prizes every month!</p>
-      <button class="btn-giveaway">Enter Now</button>
+      <img src="https://ffxlryusmstnfjedleds.supabase.co/storage/v1/object/public/Assets/Screenshot%202026-06-08%20at%2010.11.37.png" alt="Life-Changing Giveaways" class="giveaway-image">
     </div>
   </section>
 
