@@ -565,92 +565,143 @@
     /* ─────────────────────────────────────────
        TESTIMONIALS SECTION
        ───────────────────────────────────────── */
-    .testimonials {
+    .testimonials-section {
+      background: linear-gradient(135deg, #0f0f0f 0%, #1a1515 100%);
       padding: 4rem 2rem;
-      background: var(--bg-secondary);
-      animation: fadeInUp 0.8s ease;
+      min-height: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Orbitron', sans-serif;
     }
 
-    .testimonials-container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .testimonials h2 {
-      font-size: 2.5rem;
-      text-align: center;
+    .testimonials-heading {
+      font-size: 48px;
+      font-weight: 600;
+      color: #ffffff;
       margin-bottom: 3rem;
+      text-align: left;
+      width: 100%;
+      max-width: 600px;
+      letter-spacing: -1px;
+      font-family: 'Orbitron', sans-serif;
     }
 
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    .carousel-container {
+      width: 100%;
+      max-width: 800px;
+      perspective: 1000px;
+    }
+
+    .carousel-wrapper {
+      display: flex;
       gap: 2rem;
-      margin-bottom: 2rem;
+      overflow: hidden;
+      padding: 0 2rem;
+      scroll-behavior: smooth;
     }
 
     .testimonial-card {
-      background: var(--bg-primary);
-      border: 1px solid var(--border-color);
-      padding: 2rem;
-      border-radius: 12px;
-      animation: fadeInUp 0.8s ease 0.2s both;
-      transition: all 0.3s ease;
+      flex: 0 0 calc(100% - 4rem);
+      background: rgba(80, 30, 40, 0.3);
+      border: 1px solid rgba(220, 100, 120, 0.2);
+      border-radius: 24px;
+      padding: 2.5rem;
+      backdrop-filter: blur(10px);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 0.4;
+      transform: scale(0.95);
+      cursor: pointer;
+      font-family: 'Orbitron', sans-serif;
     }
 
-    .testimonial-card:hover {
-      border-color: var(--accent);
-      background: #1a1a1a;
+    .testimonial-card.active {
+      background: rgba(100, 40, 50, 0.5);
+      border: 1px solid rgba(220, 100, 120, 0.4);
+      opacity: 1;
+      transform: scale(1);
+      box-shadow: 0 20px 40px rgba(220, 100, 120, 0.15);
     }
 
-    .testimonial-quote {
+    .quote-text {
+      font-size: 18px;
+      color: #ffffff;
+      line-height: 1.6;
+      margin-bottom: 2rem;
       font-style: italic;
-      color: var(--text-secondary);
-      margin-bottom: 1.5rem;
-      font-size: 1rem;
+      font-family: 'Orbitron', sans-serif;
     }
 
     .testimonial-author {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 16px;
     }
 
     .author-avatar {
-      width: 50px;
-      height: 50px;
+      width: 56px;
+      height: 56px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--accent), var(--accent-light));
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 700;
-      font-size: 1.5rem;
+      font-size: 24px;
+      color: #ffffff;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .author-info {
+      display: flex;
+      flex-direction: column;
     }
 
     .author-name {
-      font-weight: 600;
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .author-role {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.6);
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      margin-top: 2px;
+      font-family: 'Orbitron', sans-serif;
     }
 
     .carousel-dots {
       display: flex;
       justify-content: center;
-      gap: 0.75rem;
-      margin-top: 2rem;
+      gap: 12px;
+      margin-top: 3rem;
     }
 
     .dot {
       width: 12px;
       height: 12px;
       border-radius: 50%;
-      background: var(--border-color);
+      background: rgba(220, 100, 120, 0.3);
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.4s ease;
+      border: none;
     }
 
     .dot.active {
-      background: var(--accent);
-      transform: scale(1.3);
+      background: #dc6478;
+      width: 32px;
+      border-radius: 6px;
+      box-shadow: 0 0 20px rgba(220, 100, 120, 0.5);
+    }
+
+    .dot:hover:not(.active) {
+      background: rgba(220, 100, 120, 0.5);
     }
 
     /* ─────────────────────────────────────────
@@ -806,6 +857,24 @@
       }
     }
 
+    @media (max-width: 600px) {
+      .testimonials-heading {
+        font-size: 32px;
+      }
+
+      .carousel-wrapper {
+        padding: 0 1rem;
+      }
+
+      .testimonial-card {
+        padding: 2rem;
+      }
+
+      .quote-text {
+        font-size: 16px;
+      }
+    }
+
     @media (max-width: 480px) {
       header {
         padding: 0.75rem;
@@ -837,16 +906,20 @@
         padding: 1rem;
       }
 
-      .features h2, .dashboard-section h2, .testimonials h2, .giveaways h2 {
+      .features h2, .dashboard-section h2, .giveaways h2 {
         font-size: 1.8rem;
       }
 
-      .feature-card, .dashboard-card, .testimonial-card, .signal-card {
+      .feature-card, .dashboard-card, .signal-card {
         padding: 1.5rem;
       }
 
       .giveaway-emoji {
         font-size: 3rem;
+      }
+
+      .testimonials-heading {
+        font-size: 24px;
       }
     }
   </style>
@@ -972,47 +1045,80 @@
   </section>
 
   <!-- TESTIMONIALS SECTION -->
-  <section class="testimonials">
-    <div class="testimonials-container">
-      <h2>What our people say?</h2>
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <p class="testimonial-quote">"FEST transformed my trading journey. The community support and tools are unmatched. I've grown my account by 45% in just 3 months!"</p>
+  <section class="testimonials-section">
+    <h1 class="testimonials-heading">What our<br>people say?</h1>
+
+    <div class="carousel-container">
+      <div class="carousel-wrapper" id="carouselWrapper">
+        <div class="testimonial-card active">
+          <p class="quote-text">"Went From Demo Trading To $500+ Monthly Pips In 4 Months. The Daily Signals Alone Paid For My Internet."</p>
           <div class="testimonial-author">
-            <div class="author-avatar">AJ</div>
-            <div>
-              <div class="author-name">Alex Johnson</div>
-              <div style="font-size: 0.85rem; color: var(--text-secondary);">Professional Trader</div>
+            <div class="author-avatar">JC</div>
+            <div class="author-info">
+              <div class="author-name">John Carter</div>
+              <div class="author-role">Professional Trader</div>
             </div>
           </div>
         </div>
+
         <div class="testimonial-card">
-          <p class="testimonial-quote">"The daily signals and private hubs have given me confidence in my trades. This is exactly what I needed to level up my game."</p>
+          <p class="quote-text">"Won A $500 Account On Friday Drop. Been Trading It For 3 Weeks Now. Already Up 32%"</p>
           <div class="testimonial-author">
-            <div class="author-avatar">SM</div>
-            <div>
-              <div class="author-name">Sarah Miller</div>
-              <div style="font-size: 0.85rem; color: var(--text-secondary);">Day Trader</div>
+            <div class="author-avatar">SA</div>
+            <div class="author-info">
+              <div class="author-name">Sarah Ahmed</div>
+              <div class="author-role">Day Trader</div>
             </div>
           </div>
         </div>
+
         <div class="testimonial-card">
-          <p class="testimonial-quote">"Best platform I've used. The educational resources are comprehensive, and the community is incredibly helpful and supportive."</p>
+          <p class="quote-text">"The Community Aspect Is Underrated. Having 6k People On The Same Journey Means I'm Never Alone."</p>
           <div class="testimonial-author">
             <div class="author-avatar">MC</div>
-            <div>
-              <div class="author-name">Michael Chen</div>
-              <div style="font-size: 0.85rem; color: var(--text-secondary);">Swing Trader</div>
+            <div class="author-info">
+              <div class="author-name">Marcus Chen</div>
+              <div class="author-role">Swing Trader</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="quote-text">"From Zero To Consistent Profits In 6 Months. The Structured Learning Path Made All The Difference."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">EP</div>
+            <div class="author-info">
+              <div class="author-name">Emma Patel</div>
+              <div class="author-role">Algorithmic Trader</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="quote-text">"Real Results From Real People. This Isn't Just Hype, The Signals Actually Work."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">DJ</div>
+            <div class="author-info">
+              <div class="author-name">David Johnson</div>
+              <div class="author-role">Full-Time Trader</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="quote-text">"Best Investment I've Made. The Education + Signals Combo Is Unbeatable In This Market."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">LW</div>
+            <div class="author-info">
+              <div class="author-name">Lisa Wong</div>
+              <div class="author-role">Risk Manager</div>
             </div>
           </div>
         </div>
       </div>
-      <div class="carousel-dots">
-        <div class="dot active" data-slide="0"></div>
-        <div class="dot" data-slide="1"></div>
-        <div class="dot" data-slide="2"></div>
-      </div>
     </div>
+
+    <div class="carousel-dots" id="dotsContainer"></div>
   </section>
 
   <!-- FOOTER -->
@@ -1041,14 +1147,64 @@
       });
     });
 
-    // Carousel dots functionality
-    const dots = document.querySelectorAll('.dot');
-    dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => {
-        dots.forEach(d => d.classList.remove('active'));
-        dot.classList.add('active');
+    // Testimonials Carousel
+    const wrapper = document.getElementById('carouselWrapper');
+    const dotsContainer = document.getElementById('dotsContainer');
+    const cards = wrapper ? wrapper.querySelectorAll('.testimonial-card') : [];
+    let currentIndex = 0;
+    let autoplayInterval;
+
+    function createDots() {
+      cards.forEach((_, index) => {
+        const dot = document.createElement('button');
+        dot.className = 'dot';
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(index));
+        dotsContainer.appendChild(dot);
       });
-    });
+    }
+
+    function updateDots() {
+      const dots = dotsContainer.querySelectorAll('.dot');
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentIndex);
+      });
+    }
+
+    function updateCards() {
+      cards.forEach((card, index) => {
+        card.classList.toggle('active', index === currentIndex);
+      });
+    }
+
+    function goToSlide(index) {
+      currentIndex = index;
+      wrapper.scrollLeft = index * (wrapper.offsetWidth + 32);
+      updateCards();
+      updateDots();
+      resetAutoplay();
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % cards.length;
+      goToSlide(currentIndex);
+    }
+
+    function autoplay() {
+      autoplayInterval = setInterval(nextSlide, 5000);
+    }
+
+    function resetAutoplay() {
+      clearInterval(autoplayInterval);
+      autoplay();
+    }
+
+    if (wrapper) {
+      createDots();
+      autoplay();
+      wrapper.addEventListener('mouseenter', () => clearInterval(autoplayInterval));
+      wrapper.addEventListener('mouseleave', autoplay);
+    }
 
     // Smooth scroll for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
