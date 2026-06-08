@@ -305,133 +305,18 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 2rem;
-      align-items: stretch;
+      align-items: flex-start;
     }
 
-    .engine-left {
-      background: var(--bg-secondary);
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      border-radius: 20px;
-      padding: 2rem;
+    .engine-image {
+      width: 100%;
+      height: auto;
+      display: block;
       animation: fadeInUp 0.8s ease 0.2s both;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
     }
 
-    .engine-left img {
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-      border-radius: 12px;
-    }
-
-    .engine-left h2 {
-      display: none;
-    }
-
-    .signal-card {
-      background: transparent;
-      border: none;
-      padding: 0;
-      margin-bottom: 0;
-      animation: none;
-      transition: none;
-    }
-
-    .signal-card:hover {
-      border-color: transparent;
-      background: transparent;
-    }
-
-    .signal-pair {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .signal-pair::after {
-      content: "↗";
-      color: var(--accent);
-      font-size: 2rem;
-    }
-
-    .signal-type {
-      display: inline-block;
-      background: transparent;
-      color: var(--accent);
-      border: 2px solid var(--accent);
-      padding: 0.5rem 1.5rem;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 0.85rem;
-      margin-bottom: 1.5rem;
-      letter-spacing: 1px;
-    }
-
-    .signal-details {
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-      line-height: 2;
-    }
-
-    .signal-details div {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 2rem;
-    }
-
-    .signal-details span {
-      min-width: 120px;
-    }
-
-    .signal-details strong {
-      color: var(--text-primary);
-      font-weight: 600;
-      background: var(--bg-primary);
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      border: 1px solid var(--border-color);
-    }
-
-    .engine-right {
-      background: var(--bg-secondary);
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      border-radius: 20px;
-      padding: 2rem;
-      text-align: center;
-      animation: fadeInUp 0.8s ease 0.3s both;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .engine-right img {
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-      border-radius: 12px;
-    }
-
-    .pips-value {
-      font-size: 4rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin: 1.5rem 0;
-      letter-spacing: 2px;
-    }
-
-    .pips-label {
-      font-size: 1rem;
-      color: var(--text-secondary);
-      font-weight: 500;
+    .engine-image:nth-of-type(2) {
+      animation-delay: 0.3s;
     }
 
     /* ─────────────────────────────────────────
@@ -973,12 +858,8 @@
   <section class="daily-engine">
     <h2>Daily Engine</h2>
     <div class="engine-grid">
-      <div class="engine-left">
-        <img src="https://ffxlryusmstnfjedleds.supabase.co/storage/v1/object/public/Assets/Screenshot%202026-06-08%20at%2009.51.01.png" alt="EUR/USD BUY Signal">
-      </div>
-      <div class="engine-right">
-        <img src="https://ffxlryusmstnfjedleds.supabase.co/storage/v1/object/public/Assets/Screenshot%202026-06-08%20at%2009.51.10.png" alt="Performance Metrics">
-      </div>
+      <img src="https://ffxlryusmstnfjedleds.supabase.co/storage/v1/object/public/Assets/Screenshot%202026-06-08%20at%2009.51.01.png" alt="EUR/USD BUY Signal" class="engine-image">
+      <img src="https://ffxlryusmstnfjedleds.supabase.co/storage/v1/object/public/Assets/Screenshot%202026-06-08%20at%2009.51.10.png" alt="Performance Metrics" class="engine-image">
     </div>
   </section>
 
