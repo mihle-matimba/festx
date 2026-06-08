@@ -607,7 +607,7 @@
     .testimonial-card {
       flex: 0 0 600px;
       background: rgba(80, 30, 40, 0.3);
-      border: 1px solid rgba(220, 100, 120, 0.2);
+      border: none;
       border-radius: 24px;
       padding: 2.5rem;
       backdrop-filter: blur(10px);
@@ -616,14 +616,15 @@
       transform: scale(0.95);
       cursor: pointer;
       font-family: 'Orbitron', sans-serif;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     }
 
     .testimonial-card.active {
       background: rgba(100, 40, 50, 0.5);
-      border: 1px solid rgba(220, 100, 120, 0.4);
+      border: none;
       opacity: 1;
       transform: scale(1);
-      box-shadow: 0 20px 40px rgba(220, 100, 120, 0.15);
+      box-shadow: 0 30px 60px rgba(220, 100, 120, 0.25), 0 0 40px rgba(220, 100, 120, 0.15);
       margin: 0 auto;
     }
 
