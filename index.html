@@ -60,9 +60,10 @@
 
     .header-container {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
       gap: 3rem;
+      position: relative;
     }
 
     .logo {
@@ -74,7 +75,7 @@
       cursor: pointer;
       transition: transform 0.3s ease;
       flex-shrink: 0;
-      margin: -15px 0;
+      margin: -15px 0 -15px auto;
     }
 
     .logo:hover {
@@ -93,6 +94,9 @@
       align-items: center;
       flex: 1;
       justify-content: center;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     nav a {
@@ -119,7 +123,6 @@
       transition: all 0.3s ease;
       font-size: 0.95rem;
       white-space: nowrap;
-      margin-left: auto;
     }
 
     .btn-signup:hover {
