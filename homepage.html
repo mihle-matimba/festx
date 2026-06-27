@@ -821,17 +821,17 @@
 
       nav {
         display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
+        position: fixed;
+        top: 70px;
+        left: 10px;
+        right: 10px;
         flex-direction: column;
         background: var(--bg-primary);
         border: 1px solid var(--border-color);
         border-radius: 20px;
         padding: 1rem;
         gap: 1rem;
-        margin-top: 0.5rem;
+        z-index: 999;
       }
 
       nav.active {
