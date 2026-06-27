@@ -514,35 +514,15 @@
        ───────────────────────────────────────── */
     .giveaways {
       padding: 4rem 2rem;
-      background: radial-gradient(ellipse 800px 600px at center, rgba(255, 61, 0, 0.25) 0%, var(--bg-primary) 70%);
+      background: radial-gradient(ellipse at center bottom, rgba(180, 100, 40, 0.2) 0%, var(--bg-primary) 60%);
       text-align: center;
       animation: fadeInUp 0.8s ease;
       position: relative;
       overflow: hidden;
     }
 
-    .giveaway-background-icons {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      opacity: 0.15;
-      pointer-events: none;
-    }
-
-    .giveaway-icon {
-      color: var(--text-secondary);
-      margin: 2rem;
-      flex: 0 0 auto;
-    }
-
     .giveaways-container {
-      max-width: 600px;
+      max-width: 700px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
@@ -555,16 +535,19 @@
     .giveaway-image {
       width: 100%;
       height: auto;
-      max-width: 150px;
+      max-width: 500px;
       border-radius: 0;
       box-shadow: none;
       animation: fadeInUp 0.8s ease 0.1s both;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
 
     .giveaways h2 {
-      font-size: 2.5rem;
+      font-size: clamp(2rem, 5vw, 2.8rem);
       margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      line-height: 1.2;
       animation: fadeInUp 0.8s ease 0.2s both;
     }
 
@@ -572,10 +555,10 @@
       background: linear-gradient(135deg, var(--accent), var(--accent-light));
       color: white;
       border: none;
-      padding: 1rem 2rem;
+      padding: 0.85rem 2rem;
       border-radius: 8px;
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 0.95rem;
       cursor: pointer;
       transition: all 0.3s ease;
       animation: fadeInUp 0.8s ease 0.3s both;
@@ -1073,17 +1056,9 @@
 
   <!-- GIVEAWAYS SECTION -->
   <section class="giveaways" id="contact">
-    <div class="giveaway-background-icons">
-      <svg class="giveaway-icon" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10.5 1.5H4.605c-1.429 0-2.357 1.355-2.192 2.755l.920 7.422c.145 1.17.879 2.293 2.114 2.869m0 0a4.494 4.494 0 0 0 2.126.569h6.714m0 0a4.494 4.494 0 0 0 2.126-.569m0 0c1.235-.576 1.969-1.699 2.114-2.869l.92-7.422C21.852 2.855 20.924 1.5 19.495 1.5M4.555 13.645h14.89M7 17.5a2 2 0 0 0-2 2v2.5H5m10 0h-2v-2.5a2 2 0 0 0-2-2"/></svg>
-      <svg class="giveaway-icon" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
-      <svg class="giveaway-icon" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6-6 6 6M6 9h12M9 13v5c0 1.1.9 2 2 2h2c1.1 0 2-.9 2-2v-5"/></svg>
-      <svg class="giveaway-icon" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
-      <svg class="giveaway-icon" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></path></svg>
-      <svg class="giveaway-icon" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6-6 6 6M6 9h12M9 13v5c0 1.1.9 2 2 2h2c1.1 0 2-.9 2-2v-5"/></svg>
-    </div>
     <div class="giveaways-container">
       <img src="https://ffxlryusmstnfjedleds.supabase.co/storage/v1/object/public/Assets/Screenshot%202026-06-08%20at%2010.11.37%20(1).png" alt="Life-Changing Giveaways" class="giveaway-image">
-      <h2>Life-Changing Giveaways</h2>
+      <h2>Life-Changing<br>Giveaways</h2>
       <button class="btn-giveaway">View Active Giveaways</button>
     </div>
   </section>
