@@ -760,6 +760,25 @@
       font-size: 0.9rem;
     }
 
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-color);
+    }
+
     /* ─────────────────────────────────────────
        ANIMATIONS
        ───────────────────────────────────────── */
@@ -1064,6 +1083,11 @@
       <img src="https://ffxlryusmstnfjedleds.supabase.co/storage/v1/object/public/Assets/festxlogocolour.png" alt="FEST Logo">
     </div>
     <p class="footer-copyright">&copy; FestX Pty Ltd (2018/327081/07). All rights reserved.</p>
+    <div class="footer-links">
+      <a href="/privacy-policy">Privacy Policy</a>
+      <a href="/terms-and-conditions">Terms &amp; Conditions</a>
+      <a href="/disclaimer">Disclaimer</a>
+    </div>
   </footer>
 
   <script>
